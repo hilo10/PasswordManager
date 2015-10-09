@@ -9,17 +9,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends StartActivity {
 
-	@Override
 	public void create(Bundle savedInstanceState){
 	}
-
-
-//	@Override
-//	protected void onResume(){
-//		super.onResume();
-//
-//
-//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
