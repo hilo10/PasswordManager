@@ -6,16 +6,17 @@ import com.example.passwordmanager.R;
 import com.hilo.preference.FuncPreference;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class StartActivity extends Activity{
 
-	private static ArrayList<String> lists = new ArrayList<String>();
+	private static ArrayList<String> showLists = new ArrayList<String>();
+	private static ArrayList<String> getLists = new ArrayList<String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -25,7 +26,7 @@ public class StartActivity extends Activity{
 		initSettings();
 
 		ListView lv = (ListView)findViewById(R.id.list_view);
-		ArrayAdapter<String> adpt = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, lists);
+		ArrayAdapter<String> adpt = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, showLists);
 		lv.setAdapter(adpt);
 
 		Button addBtn = (Button)findViewById(R.id.button_newReg);
@@ -34,19 +35,19 @@ public class StartActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// Addボタン押下時の処理
-				TextView text = (TextView)findViewById(R.id.text_title);
-				text.setText("change text ...");
+				Intent intent = new Intent( getApplicationContext(), RegisterActivity.class );
+				startActivity(intent);
 			}
 		});
 	}
 
 	private void initSettings(){
 		// 登録数取得
-		int count = FuncPreference.loadNum( getApplicationContext() );
+		int maxCnt = FuncPreference.loadNum( getApplicationContext() );
 
 		// プリファレンスから登録データの読み出し
-		for( int i = 0; i <= count; i++ ){
-
+		for( int i = 0; i <= maxCnt; i++ ){
+			getLists.add( FuncPreference.loadTitle( getApplicationContext(), i ) );
 		}
 	}
 
