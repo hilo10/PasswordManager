@@ -43,7 +43,6 @@ public class StartActivity extends Activity{
 				} catch( Exception e ){
 					e.printStackTrace();
 				}
-
 			}
 		});
 	}
