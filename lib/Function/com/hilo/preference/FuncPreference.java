@@ -5,36 +5,74 @@ import android.content.SharedPreferences;
 
 public class FuncPreference {
 
-	private static final String NUMBER = "number";
-	private static final String TITLE = "title";
+	private static final String MAX_ITEM 		= "MAX_ITEM";
+	private static final String REG_TITLE 		= "REG_TITLE";
+	private static final String REG_ID 			= "REG_ID";
+	private static final String REG_PASSWORD 	= "REG_PASSWORD";
 
-	public static SharedPreferences getPreferences( Context con ){
-		SharedPreferences pref = con.getSharedPreferences( "PassMngPref" , Context.MODE_PRIVATE );
+	//===============================================================================================
+	// ShareMethod
+	//===============================================================================================
+	public static SharedPreferences getPreferences( Context context ){
+		SharedPreferences pref = context.getSharedPreferences( "PassMngPref" , Context.MODE_PRIVATE );
 		return pref;
 	}
 
-	public static int loadNum( Context con ){
+	//===============================================================================================
+	// MaxItem
+	//===============================================================================================
+	public static int loadMaxItem( Context context ){
 		// 取得失敗した場合は return"0"
-		return getPreferences( con ).getInt( NUMBER, 0 );
+		return getPreferences( context ).getInt( MAX_ITEM, 0 );
 	}
-
-	public static void saveNum( Context con, int maxNumber ){
-		SharedPreferences.Editor editor = getPreferences( con ).edit();
-		editor.putInt( NUMBER, maxNumber );
+	public static void saveMaxItem( Context context, int maxItem ){
+		SharedPreferences.Editor editor = getPreferences( context ).edit();
+		editor.putInt( MAX_ITEM, maxItem );
 		editor.commit();
 	}
 
-
-	public static String loadTitle( Context con, int number ){
+	//===============================================================================================
+	// Title
+	//===============================================================================================
+	public static String loadTitle( Context context, int number ){
 		// 取得失敗した場合は return"0"
-		String strNum = String.valueOf( Integer.valueOf( "%03d", number ) );
-		return getPreferences( con ).getString( TITLE + "_" + strNum, "0" );
+		String num = String.format("%03d", number );;
+		return getPreferences( context ).getString( REG_TITLE + "_" + num, "0" );
+	}
+	public static void saveTitle( Context context, int number, String title ){
+		String num = String.format("%03d", number );
+		SharedPreferences.Editor editor = getPreferences( context ).edit();
+		editor.putString( REG_TITLE + "_" + num, title );
+		editor.commit();
 	}
 
-	public static void saveTitle( Context con, int number, String title ){
-		String strNum = String.valueOf( Integer.valueOf( "%03d", number ) );
-		SharedPreferences.Editor editor = getPreferences(con).edit();
-		editor.putString( TITLE + "_" + strNum, title );
+	//===============================================================================================
+	// ID
+	//===============================================================================================
+	public static String loadId( Context context, int number ){
+		// 取得失敗した場合は return"0"
+		String num = String.format("%03d", number );
+		return getPreferences( context ).getString( REG_ID + "_" + num, "0" );
+	}
+	public static void saveId( Context context, int number, String id ){
+		String num = String.format("%03d", number );
+		SharedPreferences.Editor editor = getPreferences( context ).edit();
+		editor.putString( REG_ID + "_" + num, id );
+		editor.commit();
+	}
+
+	//===============================================================================================
+	// Password
+	//===============================================================================================
+	public static String loadPassword( Context context, int number ){
+		// 取得失敗した場合は return"0"
+		String num = String.format("%03d", number );
+		return getPreferences( context ).getString( REG_PASSWORD + "_" + num, "0" );
+	}
+	public static void savePassword( Context context, int number, String password ){
+		String num = String.format("%03d", number );
+		SharedPreferences.Editor editor = getPreferences( context ).edit();
+		editor.putString( REG_PASSWORD + "_" + num, password );
 		editor.commit();
 	}
 }

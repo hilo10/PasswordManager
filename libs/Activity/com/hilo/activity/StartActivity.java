@@ -16,7 +16,6 @@ import android.widget.ListView;
 public class StartActivity extends Activity{
 
 	private static ArrayList<String> showLists = new ArrayList<String>();
-	private static ArrayList<String> getLists = new ArrayList<String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -29,25 +28,37 @@ public class StartActivity extends Activity{
 		ArrayAdapter<String> adpt = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, showLists);
 		lv.setAdapter(adpt);
 
+		// reload ???
+		startActivity(getIntent());
+
 		Button addBtn = (Button)findViewById(R.id.button_newReg);
 		addBtn.setOnClickListener( new View.OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
+			public void onClick( View v ) {
 				// Addボタン押下時の処理
-				Intent intent = new Intent( getApplicationContext(), RegisterActivity.class );
-				startActivity(intent);
+				Intent intent = new Intent( StartActivity.this, RegisterActivity.class );
+				try{
+					startActivity( intent );
+				} catch( Exception e ){
+					e.printStackTrace();
+				}
+
 			}
 		});
 	}
 
 	private void initSettings(){
 		// 登録数取得
-		int maxCnt = FuncPreference.loadNum( getApplicationContext() );
+		int maxCnt = FuncPreference.loadMaxItem( getApplicationContext() );
+
+		if( maxCnt == 0 ){
+			return;
+		}
 
 		// プリファレンスから登録データの読み出し
-		for( int i = 0; i <= maxCnt; i++ ){
-			getLists.add( FuncPreference.loadTitle( getApplicationContext(), i ) );
+		for( int i = 1; i <= maxCnt; i++ ){
+			showLists.add( FuncPreference.loadTitle( getApplicationContext(), i ) );
 		}
 	}
 

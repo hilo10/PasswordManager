@@ -13,6 +13,11 @@ public class MainActivity extends StartActivity {
 	}
 
 	@Override
+	public void onDestroy(){
+
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;

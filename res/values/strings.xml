@@ -5,4 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="label_regTitle">Title:</string>
+    <string name="label_regId">ID:</string>
+    <string name="label_regPassword">Password:</string>
+
+    <string name="button_regItem">Done</string>
+
 </resources>
